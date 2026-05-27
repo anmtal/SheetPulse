@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheetPulse | Instant Speed-to-Lead SMS Automation for Google Sheets</title>
+    <meta name="description" content="Connect your Google Sheets to Twilio SMS and double your lead conversion rate in under 60 seconds. Completely automated, zero complex APIs to learn.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons for modern visuals -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+    <!-- Premium Ambient Background Gradients -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="logo-text">SheetPulse</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#features">Features</a>
+                <a href="#simulator" class="nav-accent">Sandbox Simulator</a>
+                <a href="#pricing">Pricing</a>
+            </nav>
+            <div class="nav-cta">
+                <button id="btn-login-trigger" class="btn btn-secondary"><i class="fa-solid fa-right-to-bracket"></i> Client Log In</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge-container">
+                        <span class="tag-badge"><i class="fa-solid fa-sparkles"></i> The Ultimate Speed-to-Lead Solution</span>
+                    </div>
+                    <h1>Double Your Lead Conversions <span class="text-gradient">In 30 Seconds</span></h1>
+                    <p class="hero-subtitle">
+                        Stop losing 80% of your leads to slow follow-up. SheetPulse instantly turns new Google Sheet entries into personalized SMS text reminders with your direct Calendly booking link. 
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#simulator" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Launch Live Simulator
+                        </a>
+                        <a href="#features" class="btn btn-outline btn-lg">Explore Features</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">391%</span>
+                            <span class="stat-label">Higher Conversion</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">&lt; 30s</span>
+                            <span class="stat-label">Response Time</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="glass-card hero-preview-card">
+                        <div class="card-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="preview-title">Speed-to-Lead Engine Active</span>
+                        </div>
+                        <div class="preview-body">
+                            <div class="preview-row animate-in-1">
+                                <div class="preview-icon google-color"><i class="fa-brands fa-google-drive"></i></div>
+                                <div class="preview-text">
+                                    <span class="title">New Lead Added to Google Sheet</span>
+                                    <span class="desc">John Smith • +1 (647) 555-0199 • HVAC Quote</span>
+                                </div>
+                                <div class="preview-status status-success"><i class="fa-solid fa-circle-check"></i> Triggered</div>
+                            </div>
+                            <div class="preview-connector animate-in-2"></div>
+                            <div class="preview-row animate-in-3">
+                                <div class="preview-icon app-color"><i class="fa-solid fa-rotate"></i></div>
+                                <div class="preview-text">
+                                    <span class="title">SheetPulse Logic Processing</span>
+                                    <span class="desc">Vetting, Formatting, & Carrier Routing</span>
+                                </div>
+                                <div class="preview-status status-active"><i class="fa-solid fa-gear fa-spin"></i> Active</div>
+                            </div>
+                            <div class="preview-connector animate-in-4"></div>
+                            <div class="preview-row animate-in-5">
+                                <div class="preview-icon twilio-color"><i class="fa-solid fa-comment-sms"></i></div>
+                                <div class="preview-text">
+                                    <span class="title">Outbound Text Sent via Twilio</span>
+                                    <span class="desc">"Hey John, book your plumbing estimate..."</span>
+                                </div>
+                                <div class="preview-status status-success"><i class="fa-solid fa-circle-check"></i> Delivered</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <div class="section-title-wrapper text-center">
+                    <h2>Everything You Need, <span class="text-gradient">Fully Automated</span></h2>
+                    <p class="section-subtitle">We handle the servers, the Twilio APIs, and the carrier registrations. You just connect your spreadsheet and watch your calendar fill up.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon"><i class="fa-brands fa-google"></i></div>
+                        <h3>Google Sheets Integration</h3>
+                        <p>No software to install. We link directly to your existing Google Sheet. Simply keep using it as you normally do.</p>
+                    </div>
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-phone-volume"></i></div>
+                        <h3>Dedicated Local Numbers</h3>
+                        <p>We provision a clean, dedicated local Canadian or US phone number for your business to ensure maximum trust.</p>
+                    </div>
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>A2P 10DLC Compliance</h3>
+                        <p>Carriers block unregistered automated texts. We handle 100% of the complex legal carrier registration for you.</p>
+                    </div>
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <h3>Smart Follow-up Nurture</h3>
+                        <p>If the lead doesn't book a call within 2 hours, our system sends a polite automated text nudge to maximize booking rates.</p>
+                    </div>
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                        <h3>Calendly Sync</h3>
+                        <p>Seamlessly integrates with your Calendly link, detecting when a call is booked so we automatically pause reminders.</p>
+                    </div>
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Real-time Logs & ROI</h3>
+                        <p>Track exactly which texts went out, who booked a call, and your overall speed-to-lead success rate instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Sandbox Simulator Section -->
+        <section id="simulator" class="simulator-section">
+            <div class="container">
+                <div class="section-title-wrapper text-center">
+                    <h2>Interactive <span class="text-gradient">Sandbox Simulator</span></h2>
+                    <p class="section-subtitle">Test out exactly how SheetPulse works for your clients. Simulate the self-serve setup and trigger a live mock lead text!</p>
+                </div>
+
+                <div class="simulator-layout">
+                    <!-- Setup Portal Controls (Left) -->
+                    <div class="simulator-left">
+                        <div class="glass-card control-card">
+                            <div class="step-indicator">
+                                <span class="step-num">Step 1</span>
+                                <span class="step-title">Connect Google Sheets</span>
+                            </div>
+                            <div class="step-content">
+                                <button id="btn-oauth" class="btn btn-outline btn-full">
+                                    <i class="fa-brands fa-google"></i> Connect with Google Sheets
+                                </button>
+                                <div id="sheet-selector-container" class="form-group hidden animate-fade-in">
+                                    <label for="select-sheet">Select Lead Google Sheet</label>
+                                    <select id="select-sheet" class="form-input">
+                                        <option value="">-- Choose a spreadsheet --</option>
+                                        <option value="fb-leads">Facebook Ad Leads (Active)</option>
+                                        <option value="g-leads">Google HVAC Quote Form (Active)</option>
+                                        <option value="web-inquiry">Website Contact Us (Active)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="developer-settings-box" style="margin-top: 16px; padding: 12px; background: rgba(255,255,255,0.02); border: 1px dashed var(--border-glass); border-radius: 8px;">
+                                    <div class="form-group" style="flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                        <label for="toggle-real-mode" style="cursor: pointer;"><i class="fa-solid fa-plug text-gradient"></i> Enable Real Integration Mode</label>
+                                        <input type="checkbox" id="toggle-real-mode" style="width: 18px; height: 18px; cursor: pointer;">
+                                    </div>
+                                    <div id="real-mode-inputs" class="form-group hidden animate-fade-in" style="margin-bottom: 0;">
+                                        <label for="input-webhook">Make.com Webhook URL</label>
+                                        <input type="text" id="input-webhook" class="form-input" style="font-size: 0.8rem; padding: 8px 12px;" placeholder="https://hook.us1.make.com/...">
+                                        <small class="form-help" style="color: var(--color-secondary);"><i class="fa-solid fa-circle-info"></i> Paste your real Make.com webhook URL here to trigger real SMS texts!</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="card-divider">
+
+                            <div class="step-indicator">
+                                <span class="step-num">Step 2</span>
+                                <span class="step-title">Setup Booking & Number</span>
+                            </div>
+                            <div class="step-content">
+                                <div class="form-group">
+                                    <label for="input-calendly">Your Calendly Link</label>
+                                    <input type="text" id="input-calendly" class="form-input" placeholder="calendly.com/hamilton-plumbing" value="calendly.com/hamilton-plumbing">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-sms-body">Custom SMS Message Template</label>
+                                    <textarea id="input-sms-body" class="form-input text-area" rows="3">Hey {Name}! Thanks for reaching out about your {Service} request. Book your free booking call here to reserve your time slot with Hamilton Plumbing: {Calendly}</textarea>
+                                    <small class="form-help">Use {Name}, {Service}, and {Calendly} to dynamically personalize the text.</small>
+                                </div>
+                                <div class="form-group">
+                                    <button id="btn-provision" class="btn btn-secondary btn-full" disabled>
+                                        <i class="fa-solid fa-phone"></i> Reserve Dedicated Local Number
+                                    </button>
+                                    <div id="number-details" class="number-badge hidden animate-fade-in">
+                                        <span class="badge-label">Your Dedicated Number:</span>
+                                        <span id="allocated-number" class="badge-val">+1 (647) 555-0149</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="card-divider">
+
+                            <div class="step-indicator">
+                                <span class="step-num">Step 3</span>
+                                <span class="step-title">Simulate a Live Lead Form</span>
+                            </div>
+                            <div class="step-content">
+                                <div class="form-group">
+                                    <label for="lead-name">Lead's Name *</label>
+                                    <input type="text" id="lead-name" class="form-input" placeholder="e.g. John Doe" value="John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lead-phone">Lead's Mobile Phone Number *</label>
+                                    <input type="text" id="lead-phone" class="form-input" placeholder="e.g. +1 (416) 555-0182" value="+1 (416) 555-0182">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lead-service">What service do you need? *</label>
+                                    <select id="lead-service" class="form-input">
+                                        <option value="Leak">Leak</option>
+                                        <option value="Clogged Drain">Clogged Drain</option>
+                                        <option value="Water Heater">Water Heater</option>
+                                        <option value="Emergency">Emergency</option>
+                                        <option value="Other: Pipe Installation">Other: Pipe Installation</option>
+                                    </select>
+                                </div>
+                                <button id="btn-trigger" class="btn btn-primary btn-full btn-glow" disabled>
+                                    <i class="fa-solid fa-play"></i> Submit Form & Trigger SMS
+                                </button>
+                                <div class="form-help" style="margin-top: 14px; font-size: 0.72rem; opacity: 0.85; line-height: 1.35;">
+                                    <i class="fa-solid fa-shield-halved"></i> <strong>A2P SMS Opt-in:</strong> By providing your phone number, you consent to receive booking updates and automated text messages from Hamilton Plumbing. Msg & data rates may apply. Reply STOP to opt-out.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sandbox Visualizer (Right) -->
+                    <div class="simulator-right">
+                        <!-- Make.com / Flow Visualization -->
+                        <div class="glass-card visualizer-card">
+                            <div class="card-header">
+                                <span class="pulse-indicator"><span class="pulse-dot"></span> System Monitor</span>
+                                <span class="engine-state text-muted" id="engine-status">Engine Idle</span>
+                            </div>
+                            <div class="flow-canvas" id="flow-canvas">
+                                <div class="flow-step node-sheet" id="node-sheet">
+                                    <div class="node-icon"><i class="fa-brands fa-google-drive"></i></div>
+                                    <span>Google Sheets</span>
+                                    <div class="node-status text-muted" id="status-sheet">Waiting</div>
+                                </div>
+                                <div class="flow-arrow-path" id="path-1">
+                                    <div class="pulse-particle"></div>
+                                </div>
+                                <div class="flow-step node-app" id="node-app">
+                                    <div class="node-icon"><i class="fa-solid fa-rotate"></i></div>
+                                    <span>SheetPulse Engine</span>
+                                    <div class="node-status text-muted" id="status-app">Idle</div>
+                                </div>
+                                <div class="flow-arrow-path" id="path-2">
+                                    <div class="pulse-particle"></div>
+                                </div>
+                                <div class="flow-step node-twilio" id="node-twilio">
+                                    <div class="node-icon"><i class="fa-solid fa-comment-sms"></i></div>
+                                    <span>Twilio SMS Routing</span>
+                                    <div class="node-status text-muted" id="status-twilio">Waiting</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Phone Display -->
+                        <div class="phone-wrapper">
+                            <div class="smartphone">
+                                <div class="phone-screen">
+                                    <div class="phone-header">
+                                        <span class="phone-time">18:05</span>
+                                        <div class="phone-notch"></div>
+                                        <div class="phone-icons">
+                                            <i class="fa-solid fa-signal"></i>
+                                            <i class="fa-solid fa-wifi"></i>
+                                            <i class="fa-solid fa-battery-full"></i>
+                                        </div>
+                                    </div>
+                                    <div class="phone-chat-info">
+                                        <div class="chat-back"><i class="fa-solid fa-chevron-left"></i></div>
+                                        <div class="chat-avatar"><i class="fa-solid fa-user-tie"></i></div>
+                                        <div class="chat-details">
+                                            <span class="chat-name" id="phone-sender-name">Local Number</span>
+                                            <span class="chat-status text-success">Active Business</span>
+                                        </div>
+                                        <div class="chat-call"><i class="fa-solid fa-phone"></i></div>
+                                    </div>
+                                    <div class="phone-body" id="phone-messages-body">
+                                        <div class="date-stamp">Today</div>
+                                        <!-- Messages dynamically added here -->
+                                        <div class="system-message">Welcome to your interactive phone. Trigger the simulator to see your lead's text pop up here instantly!</div>
+                                    </div>
+                                    <div class="phone-footer">
+                                        <div class="footer-input">
+                                            <i class="fa-solid fa-plus"></i>
+                                            <span class="placeholder-text">Text Message</span>
+                                            <i class="fa-solid fa-microphone"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing-section">
+            <div class="container">
+                <div class="section-title-wrapper text-center">
+                    <h2>Simple, <span class="text-gradient">High-Margin Pricing</span></h2>
+                </div>
+                <div class="pricing-grid">
+                    <div class="glass-card pricing-card featured">
+                        <div class="pricing-badge">Popular</div>
+                        <h3>Speed-to-Lead Package</h3>
+                        <p class="pricing-description">Completely self-serve, zero-friction setup. Perfect for any growing local service business.</p>
+                        <div class="price-container">
+                            <span class="price-currency">$</span>
+                            <span class="price-value">99</span>
+                            <span class="price-period">/ month</span>
+                        </div>
+                        <div class="price-setup-fee">+$500 CAD one-time onboarding & compliance setup</div>
+                        <hr class="card-divider">
+                        <ul class="pricing-features">
+                            <li><i class="fa-solid fa-circle-check text-gradient"></i> Direct Google Sheets Webhook Sync</li>
+                            <li><i class="fa-solid fa-circle-check text-gradient"></i> 1 Dedicated Local Canadian/US Number</li>
+                            <li><i class="fa-solid fa-circle-check text-gradient"></i> Dynamic Calendly Scheduling Integration</li>
+                            <li><i class="fa-solid fa-circle-check text-gradient"></i> Free A2P 10DLC Compliance Handled</li>
+                            <li><i class="fa-solid fa-circle-check text-gradient"></i> 500 Outbound Texts Included / month</li>
+                            <li><i class="fa-solid fa-circle-check text-gradient"></i> 2-Hour Nudge Smart Reminders</li>
+                        </ul>
+                        <a id="stripe-payment-link" href="https://buy.stripe.com/aFaaEXdwx21Q57B7dI2cg00" target="_blank" class="btn btn-primary btn-full btn-lg btn-glow">Pay Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-center">&copy; 2026 SheetPulse. Designed for Canadian High-Margin Micro-SaaS & Agency Platforms.</p>
+        </div>
+    </footer>
+
+    <!-- Client Dashboard (Visible only when logged in) -->
+    <div id="dashboard-overlay" class="dashboard-overlay hidden">
+        <div class="glass-card dashboard-card">
+            <div class="dashboard-header">
+                <h3><i class="fa-solid fa-gauge-high text-gradient"></i> Client Portal</h3>
+                <button id="btn-logout" class="btn btn-secondary btn-sm"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            </div>
+            <div class="dashboard-content">
+                <div class="user-welcome">
+                    Welcome back, <span id="user-email" class="text-gradient">client@example.com</span>
+                </div>
+                <div class="subscription-status-box">
+                    <div class="status-detail">
+                        <span class="label">Product:</span>
+                        <span class="val">Speed-to-Lead Automation Bundle</span>
+                    </div>
+                    <div class="status-detail">
+                        <span class="label">Status:</span>
+                        <span class="val text-success"><i class="fa-solid fa-circle-check"></i> Active</span>
+                    </div>
+                    <div class="status-detail">
+                        <span class="label">Cycle:</span>
+                        <span class="val">$99.99 CAD / month</span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-actions">
+                    <a href="https://billing.stripe.com/p/login/your-custom-portal-link" id="btn-manage-billing" target="_blank" class="btn btn-primary btn-full btn-glow">
+                        <i class="fa-solid fa-credit-card"></i> Manage Billing & Cancel
+                    </a>
+                    <small class="form-help text-center" style="margin-top: 10px; display: block;">
+                        *Opens secure billing portal to update cards, view invoices, or cancel.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Auth Login Modal Popup -->
+    <div id="auth-modal" class="auth-modal-overlay hidden">
+        <div class="glass-card auth-modal">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-lock text-gradient"></i> Client Login</h3>
+                <button id="btn-close-modal" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Access your dashboard to manage your active speed-to-lead subscription.</p>
+                
+                <!-- Social Logins -->
+                <div class="social-login-group">
+                    <button id="btn-login-google" class="btn btn-outline btn-full social-btn">
+                        <i class="fa-brands fa-google google-color" style="color: #4285F4; margin-right: 8px;"></i> Continue with Google
+                    </button>
+                </div>
+                
+                <div class="modal-divider" style="text-align: center; margin: 20px 0; position: relative;">
+                    <span style="background: var(--bg-primary); padding: 0 10px; font-size: 0.75rem; color: var(--text-muted); z-index: 2; position: relative;">or continue with email</span>
+                    <hr style="position: absolute; top: 50%; left: 0; width: 100%; border: none; border-top: 1px solid var(--border-glass); z-index: 1; margin: 0;">
+                </div>
+                
+                <!-- Email Login -->
+                <div class="form-group">
+                    <label for="auth-email">Email Address</label>
+                    <input type="email" id="auth-email" class="form-input" placeholder="name@company.com">
+                </div>
+                <button id="btn-login-email" class="btn btn-primary btn-full btn-glow">
+                    <i class="fa-solid fa-envelope"></i> Send Secure Login Link
+                </button>
+                <div id="auth-message" class="auth-status-msg hidden" style="margin-top: 14px; padding: 10px; border-radius: 6px; font-size: 0.8rem; text-align: center;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+</html>
